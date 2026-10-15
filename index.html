@@ -1,1202 +1,322 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohammad Fabis M | Aspiring DevOps & Cloud Engineer</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+    <!-- Tailwind CSS CDN for rapid, modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#111827',
+                        cardBorder: '#1f2937',
+                        accentBlue: '#3b82f6',
+                        accentCyan: '#06b6d4',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for professional icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* --- RESET AND VARIABLE DECLARATIONS --- */
-        :root {
-            --bg-primary: #0a0f1d;
-            --bg-secondary: #111827;
-            --bg-card: rgba(17, 24, 39, 0.75);
-            --border-color: rgba(59, 130, 246, 0.2);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --accent-blue: #3b82f6;
-            --accent-cyan: #06b6d4;
-            --accent-glow: rgba(6, 182, 212, 0.15);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow-lg: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        [data-theme="light"] {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.85);
-            --border-color: rgba(59, 130, 246, 0.2);
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --accent-blue: #2563eb;
-            --accent-cyan: #0891b2;
-            --accent-glow: rgba(8, 145, 178, 0.1);
-            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
+        /* Custom Styles & Glassmorphism */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- UTILITY CLASSES --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 6rem 0;
-        }
-
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
-            font-size: 1.1rem;
-        }
-
-        /* --- NAVBAR --- -->
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: var(--bg-card);
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(31, 41, 55, 0.8);
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3);
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px 0 rgba(59, 130, 246, 0.1);
         }
 
-        .logo {
-            font-weight: 700;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.55rem;
-        }
-
-        .logo i {
-            color: var(--accent-cyan);
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
+        .glow-effect {
             position: relative;
         }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--accent-cyan);
-        }
-
-        .nav-link::after {
+        .glow-effect::after {
             content: '';
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-cyan);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .theme-toggle {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding-top: 10rem;
-            padding-bottom: 6rem;
-            position: relative;
-            background: radial-gradient(circle at 15% 20%, var(--accent-glow) 0%, transparent 40%);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .availability-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--accent-cyan);
-            margin-bottom: 1.5rem;
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 span {
-            color: var(--accent-cyan);
-        }
-
-        .hero-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-        }
-
-        .hero-headline {
-            font-size: 1.15rem;
-            color: var(--text-primary);
-            font-weight: 500;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-
-        .hero-description {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.75rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            transform: translateY(-2px);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .social-icon:hover {
-            background: var(--accent-cyan);
-            color: white;
-            border-color: var(--accent-cyan);
-            transform: translateY(-3px);
-        }
-
-        /* Terminal Graphic */
-        .terminal-window {
-            background: #0f172a;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .terminal-header {
-            background: #1e293b;
-            padding: 0.75rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #f59e0b; }
-        .dot-green { background: #10b981; }
-
-        .terminal-title {
-            margin-left: auto;
-            margin-right: auto;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .terminal-body {
-            padding: 1.5rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            color: #38bdf8;
-            min-height: 240px;
-        }
-
-        .command-line {
-            margin-bottom: 0.75rem;
-        }
-
-        .command-prompt {
-            color: #10b981;
-            margin-right: 0.5rem;
-        }
-
-        .typing-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: var(--accent-cyan);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* --- ABOUT SECTION --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        .highlight-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 1.25rem 1.5rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: var(--transition);
-        }
-
-        .highlight-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateX(5px);
-        }
-
-        .highlight-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-cyan);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
-        .highlight-info h3 {
-            font-size: 1.05rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .highlight-info p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        /* --- TECHNICAL SKILLS --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: var(--transition);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .skill-category-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-5px);
-        }
-
-        .skill-category-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-category-header i {
-            font-size: 1.5rem;
-            color: var(--accent-cyan);
-        }
-
-        .skill-category-header h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .skill-tag {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .skill-tag:hover {
-            border-color: var(--accent-blue);
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .skill-tag i {
-            color: var(--accent-blue);
-        }
-
-        /* --- FEATURED PROJECTS --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-7px);
-        }
-
-        .project-content {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-status {
-            display: inline-block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            margin-bottom: 1rem;
-            width: max-content;
-        }
-
-        .status-completed {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .status-planned {
-            background: rgba(245, 158, 11, 0.1);
-            color: #f59e0b;
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        .project-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .project-workflow-box {
-            background: var(--bg-secondary);
-            border: 1px dashed var(--border-color);
-            padding: 0.85rem;
-            border-radius: 8px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1.5rem;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-pill {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.25rem 0.65rem;
-            border-radius: 6px;
-        }
-
-        .project-features {
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .project-features li {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .project-features li i {
-            color: var(--accent-cyan);
-            font-size: 0.8rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* --- CI/CD PIPELINE ARCHITECTURE SECTION --- */
-        .architecture-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .pipeline-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        @media (min-width: 992px) {
-            .pipeline-flow {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                gap: 1rem;
-            }
-        }
-
-        .pipeline-stage {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            flex: 1;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .pipeline-stage:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-5px);
-        }
-
-        .pipeline-stage i {
-            font-size: 2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 0.75rem;
-        }
-
-        .pipeline-stage h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .pipeline-stage p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .pipeline-arrow {
-            display: none;
-            color: var(--accent-cyan);
-            font-size: 1.25rem;
-            animation: flowMove 1.5s infinite ease-in-out;
-        }
-
-        @media (min-width: 992px) {
-            .pipeline-arrow {
-                display: block;
-            }
-        }
-
-        @keyframes flowMove {
-            0% { transform: translateX(0); opacity: 0.4; }
-            50% { transform: translateX(4px); opacity: 1; }
-            100% { transform: translateX(0); opacity: 0.4; }
-        }
-
-        /* --- CERTIFICATIONS & EDUCATION --- */
-        .grid-2col {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .card-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow-lg);
-            height: 100%;
-        }
-
-        .card-box h3 {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .card-box h3 i {
-            color: var(--accent-cyan);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 1.75rem;
-            border-left: 2px solid var(--border-color);
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -5px;
-            top: 0;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 0 4px var(--bg-card);
-        }
-
-        .timeline-date {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--accent-cyan);
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
-        }
-
-        .timeline-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* --- GITHUB & LEARNING JOURNEY --- */
-        .github-showcase {
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(10, 15, 29, 0.95));
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .github-showcase i {
-            font-size: 3.5rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1.5rem;
-        }
-
-        .github-showcase h3 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .github-showcase p {
-            color: var(--text-secondary);
-            max-width: 650px;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
-
-        /* --- CONTACT SECTION --- */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 4rem;
-        }
-
-        .contact-info h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .contact-info p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 1rem;
-        }
-
-        .contact-icon-box {
-            width: 48px;
-            height: 48px;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-cyan);
-            font-size: 1.25rem;
-        }
-
-        .contact-form {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-control {
-            width: 100%;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            padding: 0.85rem 1rem;
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-message {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            padding: 0.75rem;
-            border-radius: 6px;
-            display: none;
-        }
-
-        .form-message.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            display: block;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .footer-tagline {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            max-width: 500px;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 45px;
-            height: 45px;
-            background: var(--accent-cyan);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
-            transition: var(--transition);
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            border-radius: inherit;
+            z-index: -1;
             opacity: 0;
-            visibility: hidden;
-            z-index: 999;
-            border: none;
+            transition: opacity 0.3s ease;
         }
-
-        .back-to-top.show {
+        .glow-effect:hover::after {
             opacity: 1;
-            visibility: visible;
         }
 
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            background: var(--accent-blue);
+        /* Terminal typing animation cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
-        @media (max-width: 992px) {
-            .hero-grid, .about-grid, .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .hero h1 {
-                font-size: 2.75rem;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: var(--bg-secondary);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: var(--transition);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        @media (max-width: 768px) {
-            section {
-                padding: 4rem 0;
-            }
-
-            .hero h1 {
-                font-size: 2.25rem;
-            }
-
-            .section-title {
-                font-size: 1.85rem;
-            }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
         }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            *, ::before, ::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
         }
     </style>
 </head>
-<body>
+<body class="bg-darkBg text-gray-100 antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- --- NAVIGATION BAR --- -->
-    <header class="navbar">
-        <div class="container nav-container">
-            <a href="#home" class="logo">
-                <i class="fa-solid fa-server"></i>
-                <span>Mohammad Fabis M</span>
-            </a>
-            
-            <nav class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#pipeline" class="nav-link">CI/CD Pipeline</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
-                <a href="#education" class="nav-link">Education</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
+    <!-- NAVIGATION BAR -->
+    <nav class="sticky top-0 z-50 glass-card border-b border-gray-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Name -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="font-bold text-xl bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent flex items-center gap-2">
+                        <i class="fa-solid fa-server text-blue-500"></i> Mohammad Fabis M
+                    </a>
+                </div>
 
-            <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
-                    <i class="fa-solid fa-moon" id="themeIcon"></i>
-                </button>
-                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-1 lg:space-x-4">
+                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-blue-400 hover:text-cyan-300 transition-colors">Home</a>
+                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-300 transition-colors">About</a>
+                        <a href="#skills" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-300 transition-colors">Skills</a>
+                        <a href="#projects" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-300 transition-colors">Projects</a>
+                        <a href="#architecture" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-300 transition-colors">CI/CD</a>
+                        <a href="#certifications" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-300 transition-colors">Certifications</a>
+                        <a href="#education" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-300 transition-colors">Education</a>
+                        <a href="#contact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-300 transition-colors">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Right Action / Mobile Menu Button -->
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-800/60 text-yellow-400 hover:bg-gray-700 focus:outline-none transition-colors" aria-label="Toggle Dark/Light Mode">
+                        <i class="fa-solid fa-moon" id="theme-icon"></i>
+                    </button>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none" aria-label="Open Mobile Menu">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
 
-    <!-- --- HERO SECTION --- -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content">
-                    <div class="availability-badge">
-                        <span class="pulse-dot"></span>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-gray-800 px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="#home" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-blue-400">Home</a>
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300">About</a>
+            <a href="#skills" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300">Skills</a>
+            <a href="#projects" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300">Projects</a>
+            <a href="#architecture" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300">CI/CD</a>
+            <a href="#certifications" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300">Certifications</a>
+            <a href="#education" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300">Education</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-12 pb-20 overflow-hidden">
+        <!-- Background Glow Accents -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <!-- Availability Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/60 border border-blue-500/30 text-blue-300 text-xs sm:text-sm font-medium shadow-inner">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
                         Open to DevOps Internship Opportunities and Fresher Roles
                     </div>
-                    <h1>Hi, I'm <span>Mohammad Fabis M</span></h1>
-                    <div class="hero-title">Aspiring DevOps Engineer | Cloud Computing Enthusiast</div>
-                    <p class="hero-headline">"Building Reliable Applications Through Automation and Cloud Technology."</p>
-                    <p class="hero-description">
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+                        Hi, I'm <span class="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">Mohammad Fabis M</span>
+                    </h1>
+
+                    <p class="text-xl sm:text-2xl font-semibold text-cyan-300/90">
+                        Aspiring DevOps Engineer | Cloud Computing Enthusiast
+                    </p>
+
+                    <p class="text-lg text-gray-300 italic font-medium">
+                        "Building Reliable Applications Through Automation and Cloud Technology."
+                    </p>
+
+                    <p class="text-base text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                         I am an aspiring DevOps Engineer passionate about Linux, cloud computing, automation, containerization, and CI/CD pipelines. I enjoy learning new technologies and building practical projects that improve application deployment and infrastructure management.
                     </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#projects" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all shadow-lg shadow-blue-600/20 flex items-center gap-2">
                             <i class="fa-solid fa-code-branch"></i> View My Projects
                         </a>
-                        <!-- REPLACE WITH YOUR ACTUAL RESUME FILE PATH (e.g., assets/resume.pdf) -->
-                        <a href="Resume.pdf" target="_blank" class="btn btn-outline" download>
+                        <!-- Replace "path/to/resume.pdf" with your actual resume file path -->
+                        <a href="path/to/resume.pdf" download class="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 font-semibold transition-all flex items-center gap-2">
                             <i class="fa-solid fa-download"></i> Download Resume
                         </a>
-                        <a href="#contact" class="btn btn-outline">
+                        <a href="#contact" class="px-6 py-3 rounded-lg bg-transparent hover:bg-cyan-500/10 border border-cyan-500/40 text-cyan-400 font-semibold transition-all flex items-center gap-2">
                             <i class="fa-solid fa-envelope"></i> Contact Me
                         </a>
                     </div>
-                    <div class="social-icons">
-                        <!-- REPLACE WITH YOUR ACTUAL GITHUB URL -->
-                        <a href="https://github.com/fabismohammed" target="_blank" class="social-icon" aria-label="GitHub Profile">
+
+                    <!-- Social Media Links (Replace placeholders with actual URLs) -->
+                    <div class="flex items-center justify-center lg:justify-start gap-5 pt-4 text-gray-400 text-xl">
+                        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="GitHub Profile">
                             <i class="fa-brands fa-github"></i>
                         </a>
-                        <!-- REPLACE WITH YOUR ACTUAL LINKEDIN URL -->
-                        <a href="https://www.linkedin.com" target="_blank" class="social-icon" aria-label="LinkedIn Profile">
-                            <i class="fa-brands fa-linkedin-in"></i>
+                        <a href="https://www.linkedin.com/in/mohammed-fabis-m-b351a731b" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="LinkedIn Profile">
+                            <i class="fa-brands fa-linkedin"></i>
                         </a>
-                        <!-- REPLACE WITH YOUR ACTUAL EMAIL ADDRESS -->
-                        <a href="mailto:fabismohammed@example.com" class="social-icon" aria-label="Email Me">
+                        <a href="mailto:fabismohammed2@gmail.com" class="hover:text-blue-400 transition-colors" aria-label="Email Address">
                             <i class="fa-solid fa-envelope"></i>
                         </a>
                     </div>
                 </div>
 
-                <div class="hero-graphic">
-                    <div class="terminal-window">
-                        <div class="terminal-header">
-                            <div class="terminal-dot dot-red"></div>
-                            <div class="terminal-dot dot-yellow"></div>
-                            <div class="terminal-dot dot-green"></div>
-                            <div class="terminal-title">fabis@devops-node ~ bash</div>
-                        </div>
-                        <div class="terminal-body" id="terminalText">
-                            <div class="command-line">
-                                <span class="command-prompt">$</span><span id="typedCommand"></span><span class="typing-cursor"></span>
+                <!-- Right Visual / Terminal Mockup -->
+                <div class="lg:col-span-5">
+                    <div class="glass-card rounded-xl p-5 border border-gray-800 shadow-2xl relative overflow-hidden">
+                        <!-- Terminal Header -->
+                        <div class="flex items-center justify-between pb-4 mb-4 border-b border-gray-800">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
                             </div>
-                            <div id="terminalOutput" style="margin-top: 1rem; color: #94a3b8; font-size: 0.85rem;"></div>
+                            <div class="text-xs text-gray-400 font-mono">bash — fabis@cloud-node:~</div>
+                        </div>
+                        
+                        <!-- Terminal Body -->
+                        <div class="font-mono text-sm space-y-3 text-gray-300">
+                            <div class="flex items-center gap-2 text-cyan-400">
+                                <span class="text-blue-400">fabis@devops:~$</span> 
+                                <span id="typed-text" class="typing-cursor"></span>
+                            </div>
+                            <div class="text-gray-500 text-xs pt-2 border-t border-gray-800/50">
+                                <p class="text-green-400">✓ Status: Infrastructure Automated</p>
+                                <p class="text-blue-400">✓ Cloud: AWS EC2 & S3 Ready</p>
+                                <p class="text-cyan-400">✓ CI/CD: Jenkins Pipeline Active</p>
+                            </div>
+                        </div>
+
+                        <!-- Abstract CSS Cloud/Server Graphic -->
+                        <div class="mt-6 pt-6 border-t border-gray-800 flex justify-center items-center gap-4 text-gray-500">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="fa-brands fa-git-alt text-2xl text-orange-500"></i>
+                                <span class="text-[10px]">Git</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-xs text-gray-600"></i>
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-gears text-2xl text-red-500"></i>
+                                <span class="text-[10px]">Jenkins</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-xs text-gray-600"></i>
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="fa-brands fa-docker text-2xl text-blue-400"></i>
+                                <span class="text-[10px]">Docker</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-xs text-gray-600"></i>
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="fa-brands fa-aws text-2xl text-yellow-500"></i>
+                                <span class="text-[10px]">AWS</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- --- ABOUT ME SECTION --- -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <p class="section-subtitle">Get to know my academic background and engineering journey</p>
-            
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>
+    <!-- ABOUT ME SECTION -->
+    <section id="about" class="py-20 border-t border-gray-800/60 bg-gray-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">About Me</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">My professional journey, background, and passion for cloud engineering.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Profile bio text -->
+                <div class="lg:col-span-7 space-y-6">
+                    <p class="text-lg text-gray-300 leading-relaxed">
                         I am a Bachelor of Commerce graduate in Computer Applications who is developing practical skills in DevOps engineering and cloud technologies. My background has helped me develop problem-solving, organizational, and communication skills.
                     </p>
-                    <p>
+                    <p class="text-base text-gray-400 leading-relaxed">
                         I am currently strengthening my technical knowledge through hands-on projects involving AWS, Linux, Git, Jenkins, Docker, Kubernetes, and CI/CD automation. My goal is to contribute to a technology team while continuously learning and improving my engineering skills.
                     </p>
-                    <p>
-                        When I am not automating deployments or configuring cloud infrastructure, I enjoy exploring container orchestration concepts, optimizing scripts, and building foundational projects that bridge software development and IT operations.
-                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-graduation-cap text-blue-400"></i>
+                            <span>B.Com in Computer Applications</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-location-dot text-cyan-400"></i>
+                            <span>Kozhikode, Kerala, India</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="highlights-grid">
-                    <div class="highlight-card">
-                        <div class="highlight-icon">
+                <!-- Highlight Cards -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="glass-card p-5 rounded-xl border border-gray-800 flex items-start gap-4">
+                        <div class="p-3 bg-blue-600/20 text-blue-400 rounded-lg text-xl">
                             <i class="fa-solid fa-cloud"></i>
                         </div>
-                        <div class="highlight-info">
-                            <h3>Cloud & Infrastructure</h3>
-                            <p>Deploying and managing scalable resources on AWS and Linux environments.</p>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-100">Cloud & Infrastructure</h3>
+                            <p class="text-sm text-gray-400 mt-1">Deploying and managing scalable compute and storage resources on AWS (EC2, S3, IAM, VPC).</p>
                         </div>
                     </div>
 
-                    <div class="highlight-card">
-                        <div class="highlight-icon">
-                            <i class="fa-solid fa-arrows-spin"></i>
+                    <div class="glass-card p-5 rounded-xl border border-gray-800 flex items-start gap-4">
+                        <div class="p-3 bg-cyan-600/20 text-cyan-400 rounded-lg text-xl">
+                            <i class="fa-solid fa-infinity"></i>
                         </div>
-                        <div class="highlight-info">
-                            <h3>Automation & CI/CD</h3>
-                            <p>Streamlining code delivery using GitHub Webhooks, Jenkins, and Docker.</p>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-100">Automation & CI/CD</h3>
+                            <p class="text-sm text-gray-400 mt-1">Building automated build and deployment pipelines using Git, Webhooks, Jenkins, and Docker.</p>
                         </div>
                     </div>
 
-                    <div class="highlight-card">
-                        <div class="highlight-icon">
-                            <i class="fa-solid fa-graduation-cap"></i>
+                    <div class="glass-card p-5 rounded-xl border border-gray-800 flex items-start gap-4">
+                        <div class="p-3 bg-indigo-600/20 text-indigo-400 rounded-lg text-xl">
+                            <i class="fa-solid fa-book-open-reader"></i>
                         </div>
-                        <div class="highlight-info">
-                            <h3>Continuous Learning</h3>
-                            <p>Actively expanding knowledge into Kubernetes, container orchestration, and IaC.</p>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-100">Continuous Learning</h3>
+                            <p class="text-sm text-gray-400 mt-1">Actively expanding knowledge into container orchestration with Kubernetes and advanced Linux systems.</p>
                         </div>
                     </div>
                 </div>
@@ -1204,172 +324,426 @@
         </div>
     </section>
 
-    <!-- --- TECHNICAL SKILLS SECTION --- -->
-    <section id="skills" style="background: var(--bg-secondary);">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <p class="section-subtitle">Core technologies and tools I work with to build automated pipelines</p>
+    <!-- TECHNICAL SKILLS SECTION -->
+    <section id="skills" class="py-20 border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Technical Skills</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">Foundational competencies and tools I utilize for infrastructure and cloud deployment.</p>
+            </div>
 
-            <div class="skills-grid">
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
                 <!-- Cloud Computing -->
-                <div class="skill-category-card">
-                    <div class="skill-category-header">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <h3>Cloud Computing</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS EC2</div>
-                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS S3</div>
-                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS IAM</div>
-                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS VPC</div>
+                <div class="glass-card p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2.5 rounded-lg bg-yellow-500/10 text-yellow-500">
+                                <i class="fa-brands fa-aws text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg">Cloud Computing</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> AWS EC2</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> AWS S3</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> AWS IAM</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> AWS VPC</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Operating Systems -->
-                <div class="skill-category-card">
-                    <div class="skill-category-header">
-                        <i class="fa-solid fa-terminal"></i>
-                        <h3>Operating Systems</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <div class="skill-tag"><i class="fa-brands fa-linux"></i> Linux</div>
-                        <div class="skill-tag"><i class="fa-solid fa-file-code"></i> Shell Scripting</div>
-                        <div class="skill-tag"><i class="fa-solid fa-users-gear"></i> File & User Mgmt</div>
-                        <div class="skill-tag"><i class="fa-solid fa-screwdriver-wrench"></i> Sys Admin</div>
+                <div class="glass-card p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2.5 rounded-lg bg-orange-500/10 text-orange-400">
+                                <i class="fa-solid fa-terminal text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg">Operating Systems</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Linux</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Shell Scripting</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> File & User Management</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Basic Sys Admin</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Version Control -->
-                <div class="skill-category-card">
-                    <div class="skill-category-header">
-                        <i class="fa-solid fa-code-merge"></i>
-                        <h3>Version Control</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <div class="skill-tag"><i class="fa-brands fa-git-alt"></i> Git</div>
-                        <div class="skill-tag"><i class="fa-brands fa-github"></i> GitHub</div>
-                        <div class="skill-tag"><i class="fa-solid fa-code-branch"></i> Branching & Merging</div>
-                        <div class="skill-tag"><i class="fa-solid fa-code-pull-request"></i> Pull Requests</div>
+                <div class="glass-card p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2.5 rounded-lg bg-red-500/10 text-red-500">
+                                <i class="fa-brands fa-git-alt text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg">Version Control</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Git</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> GitHub</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Branching & Merging</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Pull Requests</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- CI/CD -->
-                <div class="skill-category-card">
-                    <div class="skill-category-header">
-                        <i class="fa-solid fa-infinity"></i>
-                        <h3>CI/CD & Automation</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <div class="skill-tag"><i class="fa-solid fa-gear"></i> Jenkins</div>
-                        <div class="skill-tag"><i class="fa-solid fa-rectangle-list"></i> Jenkins Pipelines</div>
-                        <div class="skill-tag"><i class="fa-solid fa-bolt"></i> GitHub Webhooks</div>
-                        <div class="skill-tag"><i class="fa-solid fa-hammer"></i> Automated Builds</div>
+                <div class="glass-card p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2.5 rounded-lg bg-blue-500/10 text-blue-400">
+                                <i class="fa-solid fa-gears text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg">CI/CD</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Jenkins</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Jenkins Pipelines</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> GitHub Webhooks</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Automated Builds</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Containerization -->
-                <div class="skill-category-card">
-                    <div class="skill-category-header">
-                        <i class="fa-solid fa-box-archive"></i>
-                        <h3>Containerization</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <div class="skill-tag"><i class="fa-brands fa-docker"></i> Docker</div>
-                        <div class="skill-tag"><i class="fa-solid fa-layer-group"></i> Docker Images</div>
-                        <div class="skill-tag"><i class="fa-solid fa-file-lines"></i> Dockerfiles</div>
-                        <div class="skill-tag"><i class="fa-brands fa-docker"></i> Docker Hub</div>
+                <div class="glass-card p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2.5 rounded-lg bg-cyan-500/10 text-cyan-400">
+                                <i class="fa-brands fa-docker text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg">Containerization</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Docker</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Docker Images</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Dockerfiles</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Container Management</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Docker Hub</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Web Technologies & Learning -->
-                <div class="skill-category-card">
-                    <div class="skill-category-header">
-                        <i class="fa-solid fa-globe"></i>
-                        <h3>Web & Currently Learning</h3>
-                    </div>
-                    <div class="skill-tags">
-                        <div class="skill-tag"><i class="fa-brands fa-html5"></i> HTML / CSS</div>
-                        <div class="skill-tag"><i class="fa-solid fa-server"></i> Nginx</div>
-                        <div class="skill-tag" style="border-color: var(--accent-cyan);"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</div>
-                        <div class="skill-tag" style="border-color: var(--accent-cyan);"><i class="fa-solid fa-network-wired"></i> Infrastructure as Code</div>
+                <!-- Web Technologies -->
+                <div class="glass-card p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2.5 rounded-lg bg-purple-500/10 text-purple-400">
+                                <i class="fa-solid fa-globe text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg">Web Technologies</h3>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> HTML</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> CSS</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Basic JavaScript</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-xs text-blue-400"></i> Nginx</li>
+                        </ul>
                     </div>
                 </div>
+
+                <!-- Currently Learning -->
+                <div class="glass-card p-6 rounded-xl border border-blue-500/30 bg-blue-950/20 flex flex-col justify-between md:col-span-2">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2.5 rounded-lg bg-blue-500/20 text-blue-300">
+                                <i class="fa-solid fa-graduation-cap text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg text-blue-200">Currently Learning</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2 list-none"><i class="fa-solid fa-spinner fa-spin text-xs text-cyan-400"></i> Kubernetes</li>
+                            <li class="flex items-center gap-2 list-none"><i class="fa-solid fa-spinner fa-spin text-xs text-cyan-400"></i> Container Orchestration</li>
+                            <li class="flex items-center gap-2 list-none"><i class="fa-solid fa-spinner fa-spin text-xs text-cyan-400"></i> Advanced CI/CD</li>
+                            <li class="flex items-center gap-2 list-none"><i class="fa-solid fa-spinner fa-spin text-xs text-cyan-400"></i> Infrastructure as Code (IaC)</li>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- --- FEATURED PROJECTS SECTION --- -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Real-world automation projects showcasing my cloud and CI/CD capabilities</p>
+    <!-- FEATURED PROJECTS SECTION -->
+    <section id="projects" class="py-20 border-t border-gray-800/60 bg-gray-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Featured Projects</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">Practical implementations of CI/CD workflows and cloud infrastructure automation.</p>
+            </div>
 
-            <div class="projects-grid">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
                 <!-- PROJECT 1 -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-status status-completed">Completed</span>
-                        <h3 class="project-title">DevOps Portfolio Website with CI/CD</h3>
-                        <p class="project-description">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <h3 class="text-xl sm:text-2xl font-bold text-blue-400">DevOps Portfolio Website with CI/CD</h3>
+                            <span class="px-3 py-1 text-xs rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-medium">Completed</span>
+                        </div>
+                        
+                        <p class="text-gray-300 text-sm sm:text-base mb-6 leading-relaxed">
                             Developed and deployed a personal portfolio website using a CI/CD workflow that connects GitHub, Jenkins, Docker, Docker Hub, and AWS EC2. Configured GitHub Webhooks to trigger automated builds when code changes are pushed to the repository.
                         </p>
-                        <div class="project-workflow-box">
-                            GitHub ➔ Webhook ➔ Jenkins ➔ Docker ➔ AWS EC2
+
+                        <!-- Workflow Visualization -->
+                        <div class="bg-gray-900/80 p-3 rounded-lg border border-gray-800 mb-6 text-xs font-mono text-cyan-300 overflow-x-auto">
+                            <div class="whitespace-nowrap flex items-center gap-1.5">
+                                <span class="text-gray-400">GitHub</span> <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                <span class="text-gray-400">Webhook</span> <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                <span class="text-gray-400">Jenkins</span> <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                <span class="text-gray-400">Docker</span> <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                <span class="text-gray-400">AWS EC2</span>
+                            </div>
                         </div>
-                        <div class="project-tech">
-                            <span class="tech-pill">HTML/CSS</span>
-                            <span class="tech-pill">Git</span>
-                            <span class="tech-pill">Jenkins</span>
-                            <span class="tech-pill">Docker</span>
-                            <span class="tech-pill">AWS EC2</span>
-                            <span class="tech-pill">Nginx</span>
+
+                        <!-- Technologies Tags -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">HTML/CSS</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Git & GitHub</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Jenkins</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Docker</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Docker Hub</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">AWS EC2</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Nginx</span>
                         </div>
-                        <ul class="project-features">
-                            <li><i class="fa-solid fa-check"></i> Fully automated build and deploy workflow</li>
-                            <li><i class="fa-solid fa-check"></i> Containerized application packaging</li>
-                            <li><i class="fa-solid fa-check"></i> Cloud-based hosting on secure AWS instance</li>
-                            <li><i class="fa-solid fa-check"></i> Seamless version control integration</li>
-                        </ul>
-                        <div class="project-links">
-                            <!-- REPLACE WITH YOUR ACTUAL GITHUB REPOSITORY URL -->
-                            <a href="https://github.com/fabismohammed/Portfolio" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
-                                <i class="fa-brands fa-github"></i> Repository
-                            </a>
-                            <!-- REPLACE WITH YOUR ACTUAL LIVE DEMO URL IF APPLICABLE -->
-                            <a href="#home" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
-                                <i class="fa-solid fa-external-link"></i> Live Demo
-                            </a>
+
+                        <!-- Key Features -->
+                        <div class="space-y-2 mb-8">
+                            <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Key Features:</h4>
+                            <ul class="text-sm text-gray-300 space-y-1">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-xs text-blue-400"></i> Automated build and deployment pipeline.</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-xs text-blue-400"></i> Containerized application deployment.</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-xs text-blue-400"></i> Cloud-based hosting on AWS EC2.</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-xs text-blue-400"></i> Version control integration via Webhooks.</li>
+                            </ul>
                         </div>
+                    </div>
+
+                    <!-- Action Buttons (Replace # with actual URLs) -->
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-800">
+                        <a href="https://github.com/yourusername/portfolio" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-sm font-medium text-white flex items-center gap-2 transition-all">
+                            <i class="fa-brands fa-github"></i> GitHub Repository
+                        </a>
+                        <a href="#home" class="px-4 py-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-sm font-medium text-blue-400 border border-blue-500/30 flex items-center gap-2 transition-all">
+                            <i class="fa-solid fa-globe"></i> Live Demo (Current)
+                        </a>
                     </div>
                 </div>
 
                 <!-- PROJECT 2 -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-status status-planned">In Progress / Planned</span>
-                        <h3 class="project-title">Dockerized Web Application</h3>
-                        <p class="project-description">
-                            Creating a simple web application packaged inside a Docker container to understand containerization, image creation, port mapping, and application deployment in isolated environments.
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-4 mb-4">
+                            <h3 class="text-xl sm:text-2xl font-bold text-cyan-400">Dockerized Web Application</h3>
+                            <span class="px-3 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">Planned / In Progress</span>
+                        </div>
+                        
+                        <p class="text-gray-300 text-sm sm:text-base mb-6 leading-relaxed">
+                            Create a simple web application packaged inside a Docker container to understand containerization, image creation, port mapping, and application deployment.
                         </p>
-                        <div class="project-workflow-box">
-                            Source Code ➔ Dockerfile ➔ Image Build ➔ Container Run
+
+                        <!-- Workflow Visualization -->
+                        <div class="bg-gray-900/80 p-3 rounded-lg border border-gray-800 mb-6 text-xs font-mono text-cyan-300 overflow-x-auto">
+                            <div class="whitespace-nowrap flex items-center gap-1.5">
+                                <span class="text-gray-400">Source Code</span> <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                <span class="text-gray-400">Dockerfile</span> <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                <span class="text-gray-400">Docker Build</span> <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                <span class="text-gray-400">Local Container</span>
+                            </div>
                         </div>
-                        <div class="project-tech">
-                            <span class="tech-pill">Docker</span>
-                            <span class="tech-pill">Dockerfile</span>
-                            <span class="tech-pill">Nginx</span>
-                            <span class="tech-pill">Linux</span>
+
+                        <!-- Technologies Tags -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Docker</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Dockerfile</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Nginx</span>
+                            <span class="px-2.5 py-1 text-xs rounded bg-gray-800 text-gray-300">Linux</span>
                         </div>
-                        <ul class="project-features">
-                            <li><i class="fa-solid fa-check"></i> Custom Dockerfile creation with optimized layers</li>
-                            <li><i class="fa-solid fa-check"></i> Port mapping and volume management</li>
-                            <li><i class="fa-solid fa-check"></i> Local container testing and troubleshooting</li>
-                        </ul>
-                        <div class="project-links">
-                            <!-- REPLACE WITH YOUR ACTUAL GITHUB REPOSITORY URL -->
-                            <a href="https://github.com/fabismohammed" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
-                                <i class="fa-brands fa-github"></i> Repository
-                            </a>
+
+                        <!-- Key Features -->
+                        <div class="space-y-2 mb-8">
+                            <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Key Features:</h4>
+                            <ul class="text-sm text-gray-300 space-y-1">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-xs text-cyan-400"></i> Custom Dockerfile creation.</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-xs text-cyan-400"></i> Port mapping and container execution.</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-xs text-cyan-400"></i> Lightweight Nginx web server configuration.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-800">
+                        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-sm font-medium text-white flex items-center gap-2 transition-all">
+                            <i class="fa-brands fa-github"></i> GitHub Repository
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CI/CD ARCHITECTURE SECTION -->
+    <section id="architecture" class="py-20 border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">CI/CD Deployment Architecture</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">Visual representation of my automated code integration and cloud delivery pipeline.</p>
+            </div>
+
+            <!-- Pipeline Flow Diagram -->
+            <div class="glass-card p-6 sm:p-10 rounded-2xl border border-gray-800 overflow-x-auto">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-6 min-w-[700px] lg:min-w-0">
+                    
+                    <!-- Stage 1 -->
+                    <div class="flex flex-col items-center text-center p-4 rounded-xl bg-gray-900/60 border border-gray-800 w-full lg:w-36">
+                        <div class="w-12 h-12 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="font-semibold text-sm mb-1 text-gray-200">Developer</h3>
+                        <p class="text-[11px] text-gray-400">Writes and pushes code updates.</p>
+                    </div>
+
+                    <div class="text-cyan-400 rotate-90 lg:rotate-0"><i class="fa-solid fa-arrow-right-long text-xl"></i></div>
+
+                    <!-- Stage 2 -->
+                    <div class="flex flex-col items-center text-center p-4 rounded-xl bg-gray-900/60 border border-gray-800 w-full lg:w-36">
+                        <div class="w-12 h-12 rounded-lg bg-orange-600/20 text-orange-400 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-brands fa-git-alt"></i>
+                        </div>
+                        <h3 class="font-semibold text-sm mb-1 text-gray-200">GitHub Repo</h3>
+                        <p class="text-[11px] text-gray-400">Stores project version history.</p>
+                    </div>
+
+                    <div class="text-cyan-400 rotate-90 lg:rotate-0"><i class="fa-solid fa-arrow-right-long text-xl"></i></div>
+
+                    <!-- Stage 3 -->
+                    <div class="flex flex-col items-center text-center p-4 rounded-xl bg-gray-900/60 border border-gray-800 w-full lg:w-36">
+                        <div class="w-12 h-12 rounded-lg bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="font-semibold text-sm mb-1 text-gray-200">Webhook</h3>
+                        <p class="text-[11px] text-gray-400">Triggers automated events.</p>
+                    </div>
+
+                    <div class="text-cyan-400 rotate-90 lg:rotate-0"><i class="fa-solid fa-arrow-right-long text-xl"></i></div>
+
+                    <!-- Stage 4 -->
+                    <div class="flex flex-col items-center text-center p-4 rounded-xl bg-gray-900/60 border border-gray-800 w-full lg:w-36">
+                        <div class="w-12 h-12 rounded-lg bg-red-600/20 text-red-400 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="font-semibold text-sm mb-1 text-gray-200">Jenkins</h3>
+                        <p class="text-[11px] text-gray-400">Runs automated pipeline steps.</p>
+                    </div>
+
+                    <div class="text-cyan-400 rotate-90 lg:rotate-0"><i class="fa-solid fa-arrow-right-long text-xl"></i></div>
+
+                    <!-- Stage 5 -->
+                    <div class="flex flex-col items-center text-center p-4 rounded-xl bg-gray-900/60 border border-gray-800 w-full lg:w-36">
+                        <div class="w-12 h-12 rounded-lg bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-brands fa-docker"></i>
+                        </div>
+                        <h3 class="font-semibold text-sm mb-1 text-gray-200">Docker</h3>
+                        <p class="text-[11px] text-gray-400">Builds container images.</p>
+                    </div>
+
+                    <div class="text-cyan-400 rotate-90 lg:rotate-0"><i class="fa-solid fa-arrow-right-long text-xl"></i></div>
+
+                    <!-- Stage 6 -->
+                    <div class="flex flex-col items-center text-center p-4 rounded-xl bg-gray-900/60 border border-gray-800 w-full lg:w-36">
+                        <div class="w-12 h-12 rounded-lg bg-yellow-600/25 text-yellow-400 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-brands fa-aws"></i>
+                        </div>
+                        <h3 class="font-semibold text-sm mb-1 text-gray-200">AWS EC2</h3>
+                        <p class="text-[11px] text-gray-400">Hosts live application server.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS AND LEARNING SECTION -->
+    <section id="certifications" class="py-20 border-t border-gray-800/60 bg-gray-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Certifications & Training</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">My active learning milestones and professional training credentials.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- Ongoing / Training -->
+                <div class="glass-card p-6 sm:p-8 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">In Progress</span>
+                            <i class="fa-solid fa-book-bookmark text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">DevOps & Cloud Computing Training</h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Comprehensive hands-on study covering Linux administration, Git version control, CI/CD pipelines with Jenkins, containerization using Docker, and cloud deployments on AWS EC2 & S3.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 text-xs text-gray-400">
+                        <i class="fa-solid fa-clock text-cyan-400 mr-1"></i> Active Hands-on Labs & Practical Projects
+                    </div>
+                </div>
+
+                <!-- Future Certifications Placeholder -->
+                <div class="glass-card p-6 sm:p-8 rounded-xl border border-gray-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 text-xs rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 font-medium">Targeted</span>
+                            <i class="fa-solid fa-award text-yellow-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">AWS Certified Cloud Practitioner</h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Preparing for foundational AWS cloud services, architectural best practices, security, and cloud economics.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 text-xs text-gray-400">
+                        <i class="fa-solid fa-circle-info text-yellow-400 mr-1"></i> Verification link will be added upon completion.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education" class="py-20 border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Education</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">My academic foundation and educational background.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl border border-gray-800 relative">
+                    <div class="absolute top-6 right-6 px-3 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-full border border-blue-500/20">
+                        2023 – 2026
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="p-3 bg-blue-600/20 text-blue-400 rounded-xl text-2xl hidden sm:flex">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">Bachelor of Commerce (B.Com) in Computer Applications</h3>
+                            <p class="text-cyan-400 font-medium text-base mb-2">EMEA College of Arts and Science, Kondotty</p>
+                            <p class="text-gray-400 text-sm mb-4">Affiliated with University of Calicut</p>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                Completed coursework combining business fundamentals with computer applications, fostering analytical thinking, problem-solving skills, and a strong technological aptitude.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1377,40 +751,253 @@
         </div>
     </section>
 
-    <!-- --- CI/CD ARCHITECTURE SECTION --- -->
-    <section id="pipeline" style="background: var(--bg-secondary);">
-        <div class="container">
-            <h2 class="section-title">CI/CD Pipeline Architecture</h2>
-            <p class="section-subtitle">Visual overview of my automated deployment workflow</p>
+    <!-- GITHUB & LEARNING ACTIVITY -->
+    <section class="py-20 border-t border-gray-800/60 bg-gray-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">GitHub & Hands-On Journey</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full mb-6"></div>
+            <p class="text-gray-300 text-base mb-8 leading-relaxed">
+                I am deeply committed to hands-on learning, writing clean scripts, automating deployments, and exploring cloud infrastructures. Check out my GitHub repositories for my latest scripts, project documentation, and configuration files.
+            </p>
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-semibold transition-all border border-gray-700 shadow-lg">
+                <i class="fa-brands fa-github text-xl"></i> Explore My GitHub Profile
+            </a>
+        </div>
+    </section>
 
-            <div class="architecture-container">
-                <div class="pipeline-flow">
-                    <div class="pipeline-stage">
-                        <i class="fa-solid fa-user-code"></i>
-                        <h4>1. Developer</h4>
-                        <p>Writes code locally and commits changes to repository.</p>
-                    </div>
-                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                    
-                    <div class="pipeline-stage">
-                        <i class="fa-brands fa-github"></i>
-                        <h4>2. GitHub</h4>
-                        <p>Hosts source code and triggers automated webhooks.</p>
-                    </div>
-                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Let's Connect and Build Something Great</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">I am currently looking for DevOps Internship opportunities and fresher roles. Reach out via email or connect with me on LinkedIn.</p>
+            </div>
 
-                    <div class="pipeline-stage">
-                        <i class="fa-solid fa-gear"></i>
-                        <h4>3. Jenkins</h4>
-                        <p>Executes CI/CD pipeline and builds application.</p>
-                    </div>
-                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto">
+                
+                <!-- Contact Info / Direct Links -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-6 rounded-xl border border-gray-800 space-y-6">
+                        <h3 class="text-xl font-bold text-white">Contact Information</h3>
+                        
+                        <div class="flex items-center gap-4 text-gray-300">
+                            <div class="p-3 bg-blue-600/20 text-blue-400 rounded-lg">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">Email Address</p>
+                                <a href="mailto:fabismohammed2@gmail.com" class="font-medium text-white hover:text-blue-400 transition-colors">fabismohammed2@gmail.com</a>
+                            </div>
+                        </div>
 
-                    <div class="pipeline-stage">
-                        <i class="fa-brands fa-docker"></i>
-                        <h4>4. Docker Hub</h4>
-                        <p>Stores versioned container images securely.</p>
-                    </div>
-                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="flex items-center gap-4 text-gray-300">
+                            <div class="p-3 bg-cyan-600/20 text-cyan-400 rounded-lg">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">LinkedIn Profile</p>
+                                <a href="https://www.linkedin.com/in/mohammed-fabis-m-b351a731b" target="_blank" rel="noopener noreferrer" class="font-medium text-white hover:text-blue-400 transition-colors">mohammed-fabis-m-b351a731b</a>
+                            </div>
+                        </div>
 
-                    <div class="pipeline-stage">
+                        <div class="flex items-center gap-4 text-gray-300">
+                            <div class="p-3 bg-purple-600/20 text-purple-400 rounded-lg">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">Location</p>
+                                <p class="font-medium text-white">Kozhikode, Kerala, India</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-lg bg-blue-950/40 border border-blue-500/30 text-blue-300 text-xs leading-relaxed">
+                            <i class="fa-solid fa-bell text-cyan-400 mr-1"></i> Open to DevOps Internship Opportunities and Fresher Roles.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card p-6 sm:p-8 rounded-xl border border-gray-800">
+                        <form id="contact-form" class="space-y-4" onsubmit="handleFormSubmit(event)">
+                            <div>
+                                <label for="name" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Your Name</label>
+                                <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Recruiter or Hiring Manager">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Your Email</label>
+                                <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="name@company.com">
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Subject</label>
+                                <input type="text" id="subject" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="DevOps Internship / Job Opportunity">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Message</label>
+                                <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Hello Fabis, we would like to discuss a DevOps opportunity..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Send Message
+                            </button>
+
+                            <p id="form-notice" class="text-xs text-center text-gray-400 mt-2">
+                                Note: This is a static portfolio. For direct communication, please email <a href="mailto:fabismohammed2@gmail.com" class="text-blue-400 underline">fabismohammed2@gmail.com</a>.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-gray-800 bg-gray-950 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-center sm:text-left space-y-1">
+                <p class="font-bold text-white text-base">Mohammad Fabis M</p>
+                <p class="text-xs text-gray-500">Aspiring DevOps & Cloud Engineer</p>
+            </div>
+
+            <div class="flex items-center gap-5 text-xl">
+                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/mohammed-fabis-m-b351a731b" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="mailto:fabismohammed2@gmail.com" class="hover:text-blue-400 transition-colors" aria-label="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+
+            <div class="text-center sm:text-right space-y-1">
+                <p class="text-xs text-gray-500">Designed and built with HTML, CSS, JavaScript, and a passion for DevOps.</p>
+                <p class="text-xs text-gray-600">&copy; <span id="current-year"></span> Mohammad Fabis M. All rights reserved.</p>
+            </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 flex justify-end">
+            <button onclick="scrollToTop()" class="p-3 rounded-full bg-gray-800 hover:bg-gray-700 text-blue-400 shadow-lg transition-all focus:outline-none" aria-label="Back to top">
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FUNCTIONALITY -->
+    <script>
+        // 1. Mobile Navigation Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking any mobile link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Typing Animation in Hero Section
+        const words = [
+            "git push origin main",
+            "jenkins build --trigger",
+            "docker build -t portfolio .",
+            "aws ec2 deploy success"
+        ];
+        let i = 0;
+        let timer;
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typed-text').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typed-text').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    }
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        }
+        typingEffect();
+
+        // 3. Automatic Footer Year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 4. Back to Top Button Function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 5. Contact Form Validation and Submission Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields before submitting.');
+                return;
+            }
+
+            alert('Thank you for reaching out, ' + name + '! Since this is a static portfolio, please feel free to email me directly at fabismohammed2@gmail.com.');
+            document.getElementById('contact-form').reset();
+        }
+
+        // 6. Dark / Light Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light-mode');
+            if (document.documentElement.classList.contains('light-mode')) {
+                document.body.style.backgroundColor = '#f8fafc';
+                document.body.style.color = '#0f172a';
+                themeIcon.classList.remove('fa-moon', 'text-yellow-400');
+                themeIcon.classList.add('fa-sun', 'text-orange-500');
+            } else {
+                document.body.style.backgroundColor = '#0b0f19';
+                document.body.style.color = '#f3f4f6';
+                themeIcon.classList.remove('fa-sun', 'text-orange-500');
+                themeIcon.classList.add('fa-moon', 'text-yellow-400');
+            }
+        });
+    </script>
+</body>
+</html>
