@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Fabis M | Aspiring DevOps & Cloud Engineer Portfolio</title>
+    <title>Mohammad Fabis M | Aspiring DevOps & Cloud Engineer</title>
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for recognizable technology and social icons -->
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- RESET AND VARIABLE DECLARATIONS --- */
         :root {
             --bg-primary: #0a0f1d;
             --bg-secondary: #111827;
-            --bg-card: rgba(17, 24, 39, 0.7);
+            --bg-card: rgba(17, 24, 39, 0.75);
             --border-color: rgba(59, 130, 246, 0.2);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
             --accent-blue: #3b82f6;
             --accent-cyan: #06b6d4;
             --accent-glow: rgba(6, 182, 212, 0.15);
-            --transition: all 0.3s ease;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-lg: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         [data-theme="light"] {
             --bg-primary: #f8fafc;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.8);
-            --border-color: rgba(59, 130, 246, 0.15);
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --border-color: rgba(59, 130, 246, 0.2);
             --text-primary: #0f172a;
             --text-secondary: #475569;
             --accent-blue: #2563eb;
             --accent-cyan: #0891b2;
-            --accent-glow: rgba(8, 145, 178, 0.08);
+            --accent-glow: rgba(8, 145, 178, 0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -51,116 +53,55 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* --- UTILITY REUSABLE COMPONENT STYLES --- */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- UTILITY CLASSES --- */
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 0;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
         }
 
         .section-title {
             font-size: 2.25rem;
             font-weight: 700;
+            margin-bottom: 1rem;
             text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            background: linear-gradient(to right, var(--text-primary), var(--accent-cyan));
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-            margin: 12px auto 0 auto;
-            border-radius: 2px;
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
         }
 
-        .glass-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 12px 40px 0 var(--accent-glow);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            color: #ffffff;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--text-primary);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            transform: translateY(-2px);
-        }
-
-        .badge {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--accent-cyan);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            padding: 6px 12px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* --- STICKY NAVIGATION BAR --- */
+        /* --- NAVBAR --- -->
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(10, 15, 29, 0.85);
+            background: var(--bg-card);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             transition: var(--transition);
         }
@@ -169,69 +110,76 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 18px 0;
+            height: 80px;
         }
 
         .logo {
-            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
+            font-size: 1.25rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.55rem;
         }
 
-        .logo span {
+        .logo i {
             color: var(--accent-cyan);
         }
 
         .nav-menu {
             display: flex;
-            list-style: none;
-            gap: 25px;
             align-items: center;
+            gap: 2rem;
         }
 
         .nav-link {
             color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.95rem;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: var(--transition);
             position: relative;
-            padding: 5px 0;
         }
 
         .nav-link:hover, .nav-link.active {
             color: var(--accent-cyan);
         }
 
-        .nav-link.active::after {
+        .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -4px;
             left: 0;
-            width: 100%;
+            width: 0;
             height: 2px;
             background: var(--accent-cyan);
-            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .theme-toggle {
             background: none;
-            border: none;
+            border: 1px solid var(--border-color);
             color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 1.1rem;
-            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: var(--transition);
         }
 
         .theme-toggle:hover {
+            border-color: var(--accent-cyan);
             color: var(--accent-cyan);
         }
 
@@ -241,103 +189,170 @@
             background: none;
             border: none;
             color: var(--text-primary);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
 
         /* --- HERO SECTION --- */
-        #home {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 100px;
+        .hero {
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            position: relative;
+            background: radial-gradient(circle at 15% 20%, var(--accent-glow) 0%, transparent 40%);
         }
 
         .hero-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            gap: 4rem;
             align-items: center;
         }
 
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: flex-start;
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            color: var(--accent-cyan);
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-        }
-
-        .hero-title span {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--accent-cyan);
+            font-size: 1.25rem;
             font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .hero-headline {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-style: italic;
         }
 
         .hero-description {
             color: var(--text-secondary);
             font-size: 1.05rem;
-            max-width: 600px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
         }
 
-        .hero-actions {
+        .hero-buttons {
             display: flex;
-            gap: 15px;
-            margin-top: 10px;
             flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
         }
 
-        .social-links {
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .social-icons {
             display: flex;
-            gap: 20px;
-            margin-top: 15px;
+            gap: 1rem;
         }
 
         .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--text-secondary);
-            font-size: 1.4rem;
             transition: var(--transition);
         }
 
         .social-icon:hover {
-            color: var(--accent-cyan);
+            background: var(--accent-cyan);
+            color: white;
+            border-color: var(--accent-cyan);
             transform: translateY(-3px);
         }
 
-        /* Hero Right Visual Components */
-        .hero-visual {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
+        /* Terminal Graphic */
         .terminal-window {
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            font-family: 'Fira Code', monospace;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #0f172a;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
             overflow: hidden;
-            width: 100%;
+            box-shadow: var(--shadow-lg);
         }
 
         .terminal-header {
-            background: #161b22;
-            padding: 10px 15px;
+            background: #1e293b;
+            padding: 0.75rem 1rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid #30363d;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .terminal-dot {
@@ -346,9 +361,1056 @@
             border-radius: 50%;
         }
 
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27c93f; }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
 
         .terminal-title {
-            color: #8b949e;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #38bdf8;
+            min-height: 240px;
+        }
+
+        .command-line {
+            margin-bottom: 0.75rem;
+        }
+
+        .command-prompt {
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--accent-cyan);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .highlight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .highlight-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(5px);
+        }
+
+        .highlight-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .highlight-info h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* --- TECHNICAL SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-category-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+        }
+
+        .skill-category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category-header i {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+        }
+
+        .skill-category-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .skill-tag i {
+            color: var(--accent-blue);
+        }
+
+        /* --- FEATURED PROJECTS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-7px);
+        }
+
+        .project-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-status {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            width: max-content;
+        }
+
+        .status-completed {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-planned {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-workflow-box {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-color);
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-pill {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+        }
+
+        .project-features {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-features li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-features li i {
+            color: var(--accent-cyan);
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- CI/CD PIPELINE ARCHITECTURE SECTION --- */
+        .architecture-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pipeline-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .pipeline-flow {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        .pipeline-stage {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            flex: 1;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pipeline-stage:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+        }
+
+        .pipeline-stage i {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.75rem;
+        }
+
+        .pipeline-stage h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pipeline-stage p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .pipeline-arrow {
+            display: none;
+            color: var(--accent-cyan);
+            font-size: 1.25rem;
+            animation: flowMove 1.5s infinite ease-in-out;
+        }
+
+        @media (min-width: 992px) {
+            .pipeline-arrow {
+                display: block;
+            }
+        }
+
+        @keyframes flowMove {
+            0% { transform: translateX(0); opacity: 0.4; }
+            50% { transform: translateX(4px); opacity: 1; }
+            100% { transform: translateX(0); opacity: 0.4; }
+        }
+
+        /* --- CERTIFICATIONS & EDUCATION --- */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            height: 100%;
+        }
+
+        .card-box h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-box h3 i {
+            color: var(--accent-cyan);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 1.75rem;
+            border-left: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg-card);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- GITHUB & LEARNING JOURNEY --- */
+        .github-showcase {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(10, 15, 29, 0.95));
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .github-showcase i {
+            font-size: 3.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        .github-showcase h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .github-showcase p {
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+        }
+
+        .contact-icon-box {
+            width: 48px;
+            height: 48px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            font-size: 1.25rem;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: block;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 500px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--accent-cyan);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            border: none;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            background: var(--accent-blue);
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg-secondary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .section-title {
+                font-size: 1.85rem;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- NAVIGATION BAR --- -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <i class="fa-solid fa-server"></i>
+                <span>Mohammad Fabis M</span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#pipeline" class="nav-link">CI/CD Pipeline</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- --- HERO SECTION --- -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="availability-badge">
+                        <span class="pulse-dot"></span>
+                        Open to DevOps Internship Opportunities and Fresher Roles
+                    </div>
+                    <h1>Hi, I'm <span>Mohammad Fabis M</span></h1>
+                    <div class="hero-title">Aspiring DevOps Engineer | Cloud Computing Enthusiast</div>
+                    <p class="hero-headline">"Building Reliable Applications Through Automation and Cloud Technology."</p>
+                    <p class="hero-description">
+                        I am an aspiring DevOps Engineer passionate about Linux, cloud computing, automation, containerization, and CI/CD pipelines. I enjoy learning new technologies and building practical projects that improve application deployment and infrastructure management.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fa-solid fa-code-branch"></i> View My Projects
+                        </a>
+                        <!-- REPLACE WITH YOUR ACTUAL RESUME FILE PATH (e.g., assets/resume.pdf) -->
+                        <a href="Resume.pdf" target="_blank" class="btn btn-outline" download>
+                            <i class="fa-solid fa-download"></i> Download Resume
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <i class="fa-solid fa-envelope"></i> Contact Me
+                        </a>
+                    </div>
+                    <div class="social-icons">
+                        <!-- REPLACE WITH YOUR ACTUAL GITHUB URL -->
+                        <a href="https://github.com/fabismohammed" target="_blank" class="social-icon" aria-label="GitHub Profile">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <!-- REPLACE WITH YOUR ACTUAL LINKEDIN URL -->
+                        <a href="https://www.linkedin.com" target="_blank" class="social-icon" aria-label="LinkedIn Profile">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <!-- REPLACE WITH YOUR ACTUAL EMAIL ADDRESS -->
+                        <a href="mailto:fabismohammed@example.com" class="social-icon" aria-label="Email Me">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-graphic">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-dot dot-red"></div>
+                            <div class="terminal-dot dot-yellow"></div>
+                            <div class="terminal-dot dot-green"></div>
+                            <div class="terminal-title">fabis@devops-node ~ bash</div>
+                        </div>
+                        <div class="terminal-body" id="terminalText">
+                            <div class="command-line">
+                                <span class="command-prompt">$</span><span id="typedCommand"></span><span class="typing-cursor"></span>
+                            </div>
+                            <div id="terminalOutput" style="margin-top: 1rem; color: #94a3b8; font-size: 0.85rem;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- ABOUT ME SECTION --- -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">Get to know my academic background and engineering journey</p>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        I am a Bachelor of Commerce graduate in Computer Applications who is developing practical skills in DevOps engineering and cloud technologies. My background has helped me develop problem-solving, organizational, and communication skills.
+                    </p>
+                    <p>
+                        I am currently strengthening my technical knowledge through hands-on projects involving AWS, Linux, Git, Jenkins, Docker, Kubernetes, and CI/CD automation. My goal is to contribute to a technology team while continuously learning and improving my engineering skills.
+                    </p>
+                    <p>
+                        When I am not automating deployments or configuring cloud infrastructure, I enjoy exploring container orchestration concepts, optimizing scripts, and building foundational projects that bridge software development and IT operations.
+                    </p>
+                </div>
+
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fa-solid fa-cloud"></i>
+                        </div>
+                        <div class="highlight-info">
+                            <h3>Cloud & Infrastructure</h3>
+                            <p>Deploying and managing scalable resources on AWS and Linux environments.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fa-solid fa-arrows-spin"></i>
+                        </div>
+                        <div class="highlight-info">
+                            <h3>Automation & CI/CD</h3>
+                            <p>Streamlining code delivery using GitHub Webhooks, Jenkins, and Docker.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div class="highlight-info">
+                            <h3>Continuous Learning</h3>
+                            <p>Actively expanding knowledge into Kubernetes, container orchestration, and IaC.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- TECHNICAL SKILLS SECTION --- -->
+    <section id="skills" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Core technologies and tools I work with to build automated pipelines</p>
+
+            <div class="skills-grid">
+                <!-- Cloud Computing -->
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <h3>Cloud Computing</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS EC2</div>
+                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS S3</div>
+                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS IAM</div>
+                        <div class="skill-tag"><i class="fa-brands fa-aws"></i> AWS VPC</div>
+                    </div>
+                </div>
+
+                <!-- Operating Systems -->
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fa-solid fa-terminal"></i>
+                        <h3>Operating Systems</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag"><i class="fa-brands fa-linux"></i> Linux</div>
+                        <div class="skill-tag"><i class="fa-solid fa-file-code"></i> Shell Scripting</div>
+                        <div class="skill-tag"><i class="fa-solid fa-users-gear"></i> File & User Mgmt</div>
+                        <div class="skill-tag"><i class="fa-solid fa-screwdriver-wrench"></i> Sys Admin</div>
+                    </div>
+                </div>
+
+                <!-- Version Control -->
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fa-solid fa-code-merge"></i>
+                        <h3>Version Control</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag"><i class="fa-brands fa-git-alt"></i> Git</div>
+                        <div class="skill-tag"><i class="fa-brands fa-github"></i> GitHub</div>
+                        <div class="skill-tag"><i class="fa-solid fa-code-branch"></i> Branching & Merging</div>
+                        <div class="skill-tag"><i class="fa-solid fa-code-pull-request"></i> Pull Requests</div>
+                    </div>
+                </div>
+
+                <!-- CI/CD -->
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fa-solid fa-infinity"></i>
+                        <h3>CI/CD & Automation</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag"><i class="fa-solid fa-gear"></i> Jenkins</div>
+                        <div class="skill-tag"><i class="fa-solid fa-rectangle-list"></i> Jenkins Pipelines</div>
+                        <div class="skill-tag"><i class="fa-solid fa-bolt"></i> GitHub Webhooks</div>
+                        <div class="skill-tag"><i class="fa-solid fa-hammer"></i> Automated Builds</div>
+                    </div>
+                </div>
+
+                <!-- Containerization -->
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <h3>Containerization</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag"><i class="fa-brands fa-docker"></i> Docker</div>
+                        <div class="skill-tag"><i class="fa-solid fa-layer-group"></i> Docker Images</div>
+                        <div class="skill-tag"><i class="fa-solid fa-file-lines"></i> Dockerfiles</div>
+                        <div class="skill-tag"><i class="fa-brands fa-docker"></i> Docker Hub</div>
+                    </div>
+                </div>
+
+                <!-- Web Technologies & Learning -->
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fa-solid fa-globe"></i>
+                        <h3>Web & Currently Learning</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag"><i class="fa-brands fa-html5"></i> HTML / CSS</div>
+                        <div class="skill-tag"><i class="fa-solid fa-server"></i> Nginx</div>
+                        <div class="skill-tag" style="border-color: var(--accent-cyan);"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</div>
+                        <div class="skill-tag" style="border-color: var(--accent-cyan);"><i class="fa-solid fa-network-wired"></i> Infrastructure as Code</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- FEATURED PROJECTS SECTION --- -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Real-world automation projects showcasing my cloud and CI/CD capabilities</p>
+
+            <div class="projects-grid">
+                <!-- PROJECT 1 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-status status-completed">Completed</span>
+                        <h3 class="project-title">DevOps Portfolio Website with CI/CD</h3>
+                        <p class="project-description">
+                            Developed and deployed a personal portfolio website using a CI/CD workflow that connects GitHub, Jenkins, Docker, Docker Hub, and AWS EC2. Configured GitHub Webhooks to trigger automated builds when code changes are pushed to the repository.
+                        </p>
+                        <div class="project-workflow-box">
+                            GitHub ➔ Webhook ➔ Jenkins ➔ Docker ➔ AWS EC2
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-pill">HTML/CSS</span>
+                            <span class="tech-pill">Git</span>
+                            <span class="tech-pill">Jenkins</span>
+                            <span class="tech-pill">Docker</span>
+                            <span class="tech-pill">AWS EC2</span>
+                            <span class="tech-pill">Nginx</span>
+                        </div>
+                        <ul class="project-features">
+                            <li><i class="fa-solid fa-check"></i> Fully automated build and deploy workflow</li>
+                            <li><i class="fa-solid fa-check"></i> Containerized application packaging</li>
+                            <li><i class="fa-solid fa-check"></i> Cloud-based hosting on secure AWS instance</li>
+                            <li><i class="fa-solid fa-check"></i> Seamless version control integration</li>
+                        </ul>
+                        <div class="project-links">
+                            <!-- REPLACE WITH YOUR ACTUAL GITHUB REPOSITORY URL -->
+                            <a href="https://github.com/fabismohammed/Portfolio" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                                <i class="fa-brands fa-github"></i> Repository
+                            </a>
+                            <!-- REPLACE WITH YOUR ACTUAL LIVE DEMO URL IF APPLICABLE -->
+                            <a href="#home" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                                <i class="fa-solid fa-external-link"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <span class="project-status status-planned">In Progress / Planned</span>
+                        <h3 class="project-title">Dockerized Web Application</h3>
+                        <p class="project-description">
+                            Creating a simple web application packaged inside a Docker container to understand containerization, image creation, port mapping, and application deployment in isolated environments.
+                        </p>
+                        <div class="project-workflow-box">
+                            Source Code ➔ Dockerfile ➔ Image Build ➔ Container Run
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-pill">Docker</span>
+                            <span class="tech-pill">Dockerfile</span>
+                            <span class="tech-pill">Nginx</span>
+                            <span class="tech-pill">Linux</span>
+                        </div>
+                        <ul class="project-features">
+                            <li><i class="fa-solid fa-check"></i> Custom Dockerfile creation with optimized layers</li>
+                            <li><i class="fa-solid fa-check"></i> Port mapping and volume management</li>
+                            <li><i class="fa-solid fa-check"></i> Local container testing and troubleshooting</li>
+                        </ul>
+                        <div class="project-links">
+                            <!-- REPLACE WITH YOUR ACTUAL GITHUB REPOSITORY URL -->
+                            <a href="https://github.com/fabismohammed" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                                <i class="fa-brands fa-github"></i> Repository
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- CI/CD ARCHITECTURE SECTION --- -->
+    <section id="pipeline" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">CI/CD Pipeline Architecture</h2>
+            <p class="section-subtitle">Visual overview of my automated deployment workflow</p>
+
+            <div class="architecture-container">
+                <div class="pipeline-flow">
+                    <div class="pipeline-stage">
+                        <i class="fa-solid fa-user-code"></i>
+                        <h4>1. Developer</h4>
+                        <p>Writes code locally and commits changes to repository.</p>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="pipeline-stage">
+                        <i class="fa-brands fa-github"></i>
+                        <h4>2. GitHub</h4>
+                        <p>Hosts source code and triggers automated webhooks.</p>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                    <div class="pipeline-stage">
+                        <i class="fa-solid fa-gear"></i>
+                        <h4>3. Jenkins</h4>
+                        <p>Executes CI/CD pipeline and builds application.</p>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                    <div class="pipeline-stage">
+                        <i class="fa-brands fa-docker"></i>
+                        <h4>4. Docker Hub</h4>
+                        <p>Stores versioned container images securely.</p>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                    <div class="pipeline-stage">
